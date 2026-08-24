@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeAlpha Luxury Watches - Task 1</title>
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #faf9f6; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+
+        header { background-color: #ffffff; padding: 18px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; border-bottom: 3px solid #ad1457; }
+        .logo-brand { font-size: 1.6rem; font-weight: 800; color: #1a237e; text-decoration: none; }
+        .logo-brand span { color: #ad1457; }
+        header nav { display: flex; align-items: center; gap: 30px; }
+        header nav a { color: #444; text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; }
+        header nav a:hover { color: #ad1457; }
+        header nav a.cart-btn { background: linear-gradient(135deg, #1a237e 0%, #ad1457 100%); color: white; padding: 10px 22px; border-radius: 25px; }
+
+        .hero-banner { 
+            background: linear-gradient(135deg, rgba(10, 15, 30, 0.9) 0%, rgba(173, 20, 87, 0.85) 100%), url('https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); 
+            background-size: cover; 
+            background-position: center; 
+            color: white; 
+            text-align: center; 
+            padding: 90px 20px; 
+            margin-bottom: 50px; 
+        }
+        .hero-banner h2 { font-size: 2.8rem; margin-bottom: 12px; font-weight: 800; color: #ffffff; }
+        .hero-banner p { font-size: 1.15rem; max-width: 750px; margin: 0 auto; color: #f3e5f5; line-height: 1.6; }
+
+        main { flex: 1; max-width: 1100px; width: 100%; margin: 0 auto; padding: 0 20px 50px 20px; }
+
+        .split-section { display: flex; align-items: center; justify-content: space-between; gap: 50px; margin-bottom: 60px; background: #ffffff; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); border: 1px solid #eee; }
+        .split-section.reverse { flex-direction: row-reverse; }
+        .split-text { flex: 1; }
+        .split-text h2 { font-size: 2.2rem; color: #1a237e; margin-bottom: 15px; font-weight: 800; }
+        .split-text p { font-size: 1rem; color: #555; line-height: 1.7; margin-bottom: 20px; }
+        .split-image { flex: 1; text-align: center; }
+        .split-image img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+
+        .section-title { text-align: center; font-size: 1.8rem; color: #111; margin-bottom: 30px; font-weight: 800; }
+        .section-title span { color: #ad1457; }
+
+        .product-grid { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+        .product-box { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; width: 250px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); transition: transform 0.3s; }
+        .product-box:hover { transform: translateY(-5px); border-color: #ad1457; }
+        .product-box img { width: 100%; height: 170px; object-fit: cover; margin-bottom: 15px; background: #f8fafc; border-radius: 8px; }
+        .product-box h3 { font-size: 1.1rem; color: #222; margin-bottom: 8px; font-weight: 700; }
+        .product-box p { font-size: 1.1rem; color: #ad1457; font-weight: 800; margin-bottom: 15px; }
+        .product-box button { background: #1a237e; color: white; border: none; padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .product-box button:hover { background: #ad1457; }
+
+        .offer-banner { background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%); border: 2px dashed #ad1457; padding: 40px; border-radius: 15px; text-align: center; margin-bottom: 60px; }
+        .offer-banner h3 { font-size: 2rem; color: #1a237e; margin-bottom: 10px; font-weight: 800; }
+        .offer-banner p { font-size: 1.1rem; color: #ad1457; font-weight: 700; margin-bottom: 20px; }
+        .offer-banner button { background: #ad1457; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+
+        .testimonial-section { background: #1a237e; color: white; padding: 50px; border-radius: 15px; margin-bottom: 60px; text-align: center; }
+        .testimonial-section h3 { font-size: 2rem; margin-bottom: 15px; color: #ff4081; }
+        .testimonial-section p { font-size: 1.1rem; max-width: 700px; margin: 0 auto; color: #e0e0e0; font-style: italic; line-height: 1.7; }
+        .testimonial-author { margin-top: 15px; font-weight: bold; color: #ffffff; }
+
+        .contact-section { display: flex; gap: 40px; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.04); border: 1px solid #eee; margin-bottom: 50px; }
+        .contact-form { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .contact-form h3 { font-size: 1.8rem; color: #1a237e; margin-bottom: 5px; }
+        .contact-form input, .contact-form textarea { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; width: 100%; }
+        .contact-form button { background: #ad1457; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .contact-map { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; border-radius: 8px; border: 1px solid #cbd5e1; padding: 25px; text-align: center; color: #334155; }
+
+        footer { background-color: #0f172a; color: #94a3b8; padding: 50px 20px 20px 20px; border-top: 4px solid #ad1457; }
+        .footer-container { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; padding-bottom: 30px; border-bottom: 1px solid #1e293b; }
+        .footer-col { flex: 1; min-width: 250px; }
+        .footer-col h3 { color: white; margin-bottom: 15px; font-size: 1.1rem; border-left: 3px solid #ad1457; padding-left: 8px; }
+        .footer-col p, .footer-col ul { font-size: 0.9rem; line-height: 1.7; color: #94a3b8; list-style: none; }
+        .footer-bottom { text-align: center; padding-top: 25px; font-size: 0.85rem; color: #64748b; }
+    </style>
+</head>
+<body id="home">
+
+    <header>
+        <a href="#home" class="logo-brand">CodeAlpha<span>.Watches</span></a>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#watches-grid">Shop</a>
+            <a href="#contact">Contact</a>
+            <a href="#" class="cart-btn">Cart (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <div class="hero-banner">
+        <h2>Exquisite Luxury & Smart Timepieces</h2>
+        <p>CodeAlpha Full Stack Development Internship | Student ID: CA/DF1/251199 | Intern: Rahat Maqsood | CEO: Swati Srivastava</p>
+    </div>
+
+    <main id="shop">
+        
+        <!-- About Watches Section -->
+        <div class="split-section">
+            <div class="split-text">
+                <h2>About Our Luxury Watches</h2>
+                <p>Welcome to our exclusive watch collection. We combine timeless elegance with modern smart technology to bring you precision engineering, superior craftsmanship, and unmatched style for every occasion.</p>
+                <a href="#watches-grid" style="color: #ad1457; font-weight: bold; text-decoration: none;">Explore Collection &rarr;</a>
+            </div>
+            <div class="split-image">
+                <img src="https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Luxury Watch">
+            </div>
+        </div>
+
+        <!-- Watches Grid Line 1 -->
+        <h2 id="watches-grid" class="section-title">Exclusive <span>Smart Watches</span></h2>
+        <div class="product-grid">
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/51011/pexels-photo-51011.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Smart Watch Pro</h3>
+                <p>$50</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Classic Gold Watch</h3>
+                <p>$85</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/277319/pexels-photo-277319.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Sport Edition Watch</h3>
+                <p>$65</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Minimalist Watch</h3>
+                <p>$40</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Second Featured Watch Section -->
+        <div class="split-section reverse">
+            <div class="split-text">
+                <h2>Crafted for Perfection</h2>
+                <p>Each timepiece in our store goes through rigorous quality testing to ensure water resistance, scratchproof sapphire glass, and long-lasting battery life. Elevate your presence today.</p>
+                <a href="#watches-grid" style="color: #ad1457; font-weight: bold; text-decoration: none;">Shop New Arrivals &rarr;</a>
+            </div>
+            <div class="split-image">
+                <img src="https://images.pexels.com/photos/1162519/pexels-photo-1162519.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gold Watch">
+            </div>
+        </div>
+
+        <!-- Watches Grid Line 2 -->
+        <h2 class="section-title">Classic <span>Timepieces</span></h2>
+        <div class="product-grid">
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/1697214/pexels-photo-1697214.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Executive Chronograph</h3>
+                <p>$95</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/280250/pexels-photo-280250.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Titanium Black Watch</h3>
+                <p>$110</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Royal Steel Watch</h3>
+                <p>$130</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+            <div class="product-box">
+                <img src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Watch">
+                <h3>Vanguard Smart Fit</h3>
+                <p>$75</p>
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Special Offer Banner -->
+        <div class="offer-banner">
+            <h3>Special Internship Project Offer</h3>
+            <p>Get 15% OFF on all luxury watches during your CodeAlpha evaluation period!</p>
+            <button onclick="alert('Offer applied successfully!')">Claim Discount</button>
+        </div>
+
+        <!-- Testimonial Section -->
+        <div class="testimonial-section">
+            <h3>Testimonial</h3>
+            <p>"Developing this dedicated watch e-commerce web platform as part of the CodeAlpha internship under CEO Swati Srivastava has been an amazing journey in mastering frontend layout design and user interaction."</p>
+            <div class="testimonial-author">- Rahat Maqsood (Web Development Intern)</div>
+        </div>
+
+        <!-- Contact Us Section -->
+        <div id="contact" class="contact-section">
+            <div class="contact-form">
+                <h3>Contact Us</h3>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 10px;">Have questions regarding this watch store project? Send a message below.</p>
+                <input type="text" placeholder="Your Name">
+                <input type="text" placeholder="Phone Number">
+                <input type="email" placeholder="Email Address">
+                <textarea rows="4" placeholder="Your Message"></textarea>
+                <button onclick="alert('Message sent successfully!')">Send Message</button>
+            </div>
+            <div class="contact-map">
+                <strong>CodeAlpha Corporate Headquarters</strong><br>
+                Lucknow, Uttar Pradesh, India<br>
+                <span style="font-size: 0.85rem; color: #64748b; margin-top: 5px; display: block;">Email: services@codealpha.tech</span>
+                <span style="font-size: 0.85rem; color: #64748b;">Support: support@codealpha.tech</span>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>About CodeAlpha</h3>
+                <p>CodeAlpha is a prominent Ed-Tech and IT services organization providing rigorous virtual internships empowering global tech talents through hands-on web engineering projects.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Corporate Details</h3>
+                <p><strong>Founder & CEO:</strong> Swati Srivastava<br>
+                <strong>Headquarters:</strong> Lucknow, U.P., India<br>
+                <strong>Certification:</strong> MSME, Gov of India</p>
+            </div>
+            <div class="footer-col">
+                <h3>Intern Credentials</h3>
+                <p><strong>Name:</strong> Rahat Maqsood<br>
+                <strong>Student ID:</strong> CA/DF1/251199<br>
+                <strong>Role:</strong> Full Stack Web Development Intern</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CodeAlpha Internship Program. Developed by Rahat Maqsood. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            document.getElementById("cart-count").innerText = cartCount;
+            alert("Watch successfully added to cart!");
+        }
+    </script>
+</body>
+</html>
